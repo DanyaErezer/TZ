@@ -1,3 +1,8 @@
+@extends('layouts.app')
+
+@section('title', 'Заказы')
+
+@section('main_content')
 <!doctype html>
 <html lang="en">
 <head>
@@ -14,9 +19,11 @@
         <td>{{ $order->created_at }}</td>
         <td>{{ $order->customer_name }}</td>
         <td>{{ $order->status }}</td>
-        <td>{{ $order->total_price }} руб.</td>
+        <td>{{ $order->product->name }}</td>
+        <td>{{ $order->total_price }}</td>
     </tr>
 @endforeach
 
 </body>
 </html>
+@endsection

@@ -5,7 +5,7 @@ use App\Http\Controllers\OrderControllers;
 use App\Http\Controllers\ProductControllers;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 Route::resource('products', ProductControllers::class);
 Route::resource('orders', OrderControllers::class);
