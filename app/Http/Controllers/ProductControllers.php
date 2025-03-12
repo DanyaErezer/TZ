@@ -32,4 +32,36 @@ class ProductControllers extends Controller
 
         return redirect()->route('products.index')->with('success', 'Товар успешно добавлен!');
     }
+    public function edit(Product $product)
+    {
+        $categories = Category::all();
+        return view('products.edit', compact('product', 'categories'));
+    }
+
+    public function update(Request $request, Product $product)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'price' => 'required|numeric|min:0',
+            'category_id' => 'required|exists:categories,id',
+            'description' => 'nullable|string',
+        ]);
+
+        $product->update($request->all());
+
+        return redirect()->route('products.index')->with('success', 'Товар успешно обновлен!');
+    }
+    public function destroy(Product $product)
+    {
+
+        if ($product->orders()->exists()) {
+            return redirect()->route('products.index')->with('error', 'Невозможно удалить товар: есть связанные заказы.');
+        }
+
+
+        $product->delete();
+
+        return redirect()->route('products.index')->with('success', 'Товар успешно удален!');
+    }
 }
+

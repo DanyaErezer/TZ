@@ -21,12 +21,6 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('orders.index') }}">Заказы</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('orders.create') }}">Создание заказов</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('products.create') }}">Создание товаров</a>
-                </li>
             </ul>
         </div>
     </div>

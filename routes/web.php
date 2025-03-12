@@ -7,5 +7,5 @@ use App\Http\Controllers\ProductControllers;
 Route::get('/', function () {
     return view('home');
 });
-Route::resource('products', ProductControllers::class);
-Route::resource('orders', OrderControllers::class);
+Route::resource('products', ProductControllers::class)->except('show');
+Route::resource('orders', OrderControllers::class)->only('index', 'create', 'store');

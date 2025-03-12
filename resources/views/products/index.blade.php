@@ -1,26 +1,35 @@
 @extends('layouts.app')
 
-@section('title', 'Товары')
+@section('title', 'Список товаров')
 
 @section('main_content')
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
-</head>
-<body>
-@foreach ($products as $product)
-    <tr>
-        <td>{{ $product->name }}</td>
-        <td>{{ $product->price }} руб.</td>
-        <td>{{ $product->category->name }}</td>
-    </tr>
-@endforeach
-
-</body>
-</html>
+    <h1>Список товаров</h1>
+    <a href="{{ route('products.create') }}" class="btn btn-primary mb-3">Добавить товар</a>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Название</th>
+            <th>Цена</th>
+            <th>Категория</th>
+            <th>Действия</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach ($products as $product)
+            <tr>
+                <td>{{ $product->name }}</td>
+                <td>{{ $product->price }} руб.</td>
+                <td>{{ $product->category->name }}</td>
+                <td>
+                    <a href="{{ route('products.edit', $product) }}" class="btn btn-warning btn-sm">Редактировать</a>
+                    <form action="{{ route('products.destroy', $product) }}" method="POST" style="display:inline;">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Вы уверены, что хотите удалить этот товар?')">Удалить</button>
+                    </form>
+                </td>
+            </tr>
+        @endforeach
+        </tbody>
+    </table>
 @endsection
