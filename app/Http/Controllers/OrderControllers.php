@@ -42,4 +42,18 @@ class OrderControllers extends Controller
 
         return redirect()->route('orders.index')->with('success', 'Заказ успешно добавлен!');
     }
+    public function show(Order $order){
+        $order->load('product');
+        return view('orders.show', compact('order'));
+    }
+
+    public function complete(Order $order)
+    {
+        if ($order->status === 'new') {
+            $order->update(['status' => 'completed']);
+            return redirect()->route('orders.show', $order)->with('success', 'Статус заказа изменен на "выполнен"!');
+        }
+
+        return redirect()->route('orders.show', $order)->with('error', 'Невозможно изменить статус заказа.');
+    }
 }

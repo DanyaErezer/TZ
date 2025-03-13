@@ -63,5 +63,13 @@ class ProductControllers extends Controller
 
         return redirect()->route('products.index')->with('success', 'Товар успешно удален!');
     }
+
+    public function show(Product $product)
+    {
+
+        $product->load('category');
+
+        return view('products.show', compact('product'));
+    }
 }
 
