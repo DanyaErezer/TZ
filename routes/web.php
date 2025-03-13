@@ -9,4 +9,5 @@ Route::get('/', function () {
 });
 Route::resource('products', ProductControllers::class);
 Route::resource('orders', OrderControllers::class);
+//Маршрут для изменения статуса заказа
 Route::put('/orders/{order}/complete', [OrderControllers::class, 'complete'])->name('orders.complete');

@@ -51,9 +51,10 @@ class ProductControllers extends Controller
 
         return redirect()->route('products.index')->with('success', 'Товар успешно обновлен!');
     }
+
     public function destroy(Product $product)
     {
-
+        //Удаляем товар, при отсутствии связанных заказов
         if ($product->orders()->exists()) {
             return redirect()->route('products.index')->with('error', 'Невозможно удалить товар: есть связанные заказы.');
         }
